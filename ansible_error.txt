@@ -1,0 +1,54 @@
+fatal: [S2]: FAILED! => {"changed": false, "failed": true, "msg": "Unsupported parameters for (ios_config) module:                                                                                                                           transport found in provider. Supported parameters include: auth_pass,authorize,host,password,port,ssh_keyfile,timeo                                                                                                                          ut,username"}
+
+
+---
+- name: Manage GNS3 devices
+  hosts: gns3-ios
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: cisco
+      password: cisco
+      auth_pass: cisco
+
+  tasks:
+    - name: enable ospf
+      ios_config:
+        provider: "{{ cli }}"
+        authorize: yes
+        parents: router ospf 1
+        lines:
+          - network 0.0.0.0 255.255.255.255 area 0
+
+      register: print_output
+
+    -  debug: var=print_output
+
+- name: Switch specific config
+  hosts: S1, S2
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      username: rajan
+      password: cisco
+      transport: cli
+
+  tasks:
+    - name: Create VLANs
+      ios_config:
+        provider: "{{ cli }}"
+        authorize: yes
+        lines:
+          - vlan 2
+          - vlan 3
+          - vlan 4
+          - vlan 5
+
+      register: print_output
+
+    -  debug: var=print_output

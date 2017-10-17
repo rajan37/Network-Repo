@@ -1,0 +1,13 @@
+Network Automation config 
+
+cat /etc/hosts
+
+
+192.168.122.72 R1
+192.168.122.73 R2
+192.168.122.75 S1
+192.168.122.74 S2
+
+
+add the below line to /etc/ssh/sshd_config to enable ssh for DH 
+KexAlgorithms +diffie-hellman-group1-sha1
