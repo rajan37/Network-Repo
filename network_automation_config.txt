@@ -11,3 +11,23 @@ cat /etc/hosts
 
 add the below line to /etc/ssh/sshd_config to enable ssh for DH 
 KexAlgorithms +diffie-hellman-group1-sha1
+
+
+Enable DHCP 
+
+
+cat /etc/network/interfaces --> update the DHCP config to auto 
+
+# DHCP config for eth0
+ auto eth0
+ iface eth0 inet dhcp
+
+
+
+ansible.cfg
+----------------------
+[defaults]
+inventory = ./hosts
+host_key_checking = false
+timeout = 30
+log_path = /var/log/ansible.log

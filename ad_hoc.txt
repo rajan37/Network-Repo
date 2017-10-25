@@ -1,0 +1,19 @@
+run a raw command 
+
+ansible S1 -m raw -a "show version" -u rajan -k 
+
+run a raw command to the inventory for gns3hots 
+
+ansible gns3-core -i ./gns3hosts -m raw -a "show run" -u rajan -k | grep 'username'
+
+run the command against all hosts . 
+
+ansible all -i ./gns3hosts -m raw -a "show run" -u rajan -k | grep 'SUCCESS\|username'
+
+'x\|y' can be used to check multiple arguments - 
+
+ex :'SUCCESS\|username'
+
+run the command to save the config to a file 
+
+ansible gns3-core -i ./gns3hosts -m raw -a "show run" -u rajan -k > shrun.txt
