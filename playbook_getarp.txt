@@ -1,0 +1,24 @@
+---
+- name: Get ARP information
+  hosts: all
+  gather_facts: false
+
+
+  tasks:
+    - name: show arp
+      raw: "show arp"
+
+      register: print_output
+
+    -  debug: var=print_output.stdout_lines
+
+
+# Commands to run: 
+#1) ansible-playbook getarp1.yml -u rajan -k
+#2) Grep for MAC address: ansible-playbook getarp1.yml -u rajan -k | grep 'ok:\|fe7a'
+#3) Grep for IP address: ansible-playbook getarp1.yml -u rajan -k | grep 'ok:\|122\.3'
+
+
+'ok:\|122\.3' --> regular exppression 
+
+in this case look for "ok:" or denoted by \(backslash) and the |122\.3 backslash before "." indicates that its not a individual character but its 122.3 

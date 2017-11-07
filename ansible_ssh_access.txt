@@ -9,7 +9,7 @@ username rajan privilege 15
 line vty 04 
 login local
 transport input all
-ip domain-name cciepython.com
+ip domain-name rajan37.com
 crypto key generate rsa 
 1024
 
